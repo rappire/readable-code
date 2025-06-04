@@ -1,4 +1,6 @@
-package cleancode.studycafe.assignment.model;
+package cleancode.studycafe.assignment.model.locker;
+
+import cleancode.studycafe.assignment.model.StudyCafePassType;
 
 public class StudyCafeLockerPass {
 
@@ -16,17 +18,14 @@ public class StudyCafeLockerPass {
         return new StudyCafeLockerPass(passType, duration, price);
     }
 
-    public StudyCafePassType getPassType() {
-        return passType;
+    public boolean equalPassType(StudyCafePassType passType) {
+        return this.passType == passType;
     }
 
-    public int getDuration() {
-        return duration;
+    public boolean equalDuration(int duration) {
+        return this.duration == duration;
     }
 
-    public int getPrice() {
-        return price;
-    }
 
     public String display() {
         if (passType == StudyCafePassType.HOURLY) {
@@ -41,4 +40,7 @@ public class StudyCafeLockerPass {
         return "";
     }
 
+    public int getPrice() {
+        return price;
+    }
 }

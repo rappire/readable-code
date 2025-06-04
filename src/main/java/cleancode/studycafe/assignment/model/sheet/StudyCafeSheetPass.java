@@ -1,37 +1,44 @@
-package cleancode.studycafe.assignment.model;
+package cleancode.studycafe.assignment.model.sheet;
 
-public class StudyCafePass {
+import cleancode.studycafe.assignment.model.StudyCafePassType;
+import cleancode.studycafe.assignment.model.locker.StudyCafeLockerPass;
+
+public class StudyCafeSheetPass {
 
     private final StudyCafePassType passType;
     private final int duration;
     private final int price;
     private final double discountRate;
 
-    private StudyCafePass(StudyCafePassType passType, int duration, int price, double discountRate) {
+    private StudyCafeSheetPass(StudyCafePassType passType, int duration, int price, double discountRate) {
         this.passType = passType;
         this.duration = duration;
         this.price = price;
         this.discountRate = discountRate;
     }
 
-    public static StudyCafePass of(StudyCafePassType passType, int duration, int price, double discountRate) {
-        return new StudyCafePass(passType, duration, price, discountRate);
+    public static StudyCafeSheetPass of(StudyCafePassType passType, int duration, int price, double discountRate) {
+        return new StudyCafeSheetPass(passType, duration, price, discountRate);
     }
 
     public StudyCafePassType getPassType() {
         return passType;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
     public int getPrice() {
         return price;
     }
 
-    public double getDiscountRate() {
-        return discountRate;
+    public int getDiscountedPrice() {
+        return (int) (price * discountRate);
+    }
+
+    public int getTotalPrice() {
+        return price - getDiscountedPrice();
+    }
+
+    public boolean isLockerAvailable(StudyCafeLockerPass lockerPass) {
+        return lockerPass.equalPassType(passType) && lockerPass.equalDuration(duration);
     }
 
     public String display() {
